@@ -16,7 +16,7 @@ Simple markup with a data-api attribute to specifiy the  url to post changes to.
 <div class="container" data-api="/api">Lorem ipsum</div>
 ```
 
-Initialise the editor with the defaults. Changes are posted to '/api' (urt specified in the html marlup)
+Initialise the editor with the defaults. Changes are posted to '/api' (url specified in the html markup)
 
 ```javascript
 $('.container').quickEdit();
