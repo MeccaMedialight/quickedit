@@ -53,4 +53,3 @@ $('.container').quickEdit({
 - **html**:  if true, use HTML rather than text *(default false)*
 - **onSave**: null, // callback to handle saving (if a function is specified, it will be used in preference to any other scheme). If no function is specified, then data-target (for specifying inputs) or data-api (for ajax) will be used. 
 - **onSaved**: function () {} // callback after auto saving
-
