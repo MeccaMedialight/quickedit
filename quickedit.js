@@ -2,6 +2,7 @@
 // https://github.com/umdjs/umd
 /*global define: false */
 (function (factory) {
+    'use strict';
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(['jquery'], factory);
@@ -33,7 +34,12 @@
     function Plugin(element, options) {
         var el = element;
         var $this = $(element);
-        options = $.extend({}, $.fn.quickEdit.defaults, options);
+        defaults = $.extend({}, $.fn.quickEdit.defaults);
+        if ($this.is('p')) {
+            defaults.allowReturn = false;
+        }
+        options = $.extend({}, defaults, options);
+
         // init this instance
         function init() {
             var
@@ -210,7 +216,7 @@
     };
 
     $.fn.quickEdit.defaults = {
-        allowReturn: false,
+        allowReturn: true,
         submitOnBlur: true,
         html: false, // if true, use HTML rather than text
         onSave: null, // callback to handle saving

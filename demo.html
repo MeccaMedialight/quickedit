@@ -75,6 +75,69 @@
                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
                 ullamco laboris nisi ut aliquip ex ea commodo consequat. 
             </p>
+              <hr >
+            <p class="text-muted">Example 4:<br>The following "story" (div with paragraphs and a list) is editable. </p>
+            
+             <div class="story demo4">
+            <h1>
+                Editable Paragraph 
+            </h1>
+                 <h5>This whole story is editable</h5>
+            <p>
+                Lorem ipsum odio placerat tellus blandit diam
+                faucibus, morbi lacinia semper fames vivamus porttitor
+                leo velit, senectus ligula sagittis leo nisi rutrum.
+                eleifend netus nibh quisque inceptos sociosqu lorem
+                vehicula nisl vitae quisque nullam, elit arcu maecenas
+                nunc ante placerat lacinia pellentesque fusce class,
+                commodo ornare quis donec dolor maecenas malesuada nisl
+                hac sagittis. risus ac sit ut purus nam pharetra
+                elementum neque arcu erat, purus dapibus ornare
+                lobortis hac senectus ac curabitur ligula, nullam
+                inceptos semper ac lobortis vivamus class potenti nisl.
+                dolor vehicula ipsum quis faucibus viverra leo etiam
+                tristique dictumst, placerat convallis rutrum nibh in
+                habitant condimentum metus lorem, tristique aenean
+                imperdiet dictum aliquam habitant lobortis torquent. 
+            </p>
+            <ul>
+                <li>
+                    augue rutrum luctus euismod facilisis eu auctor non rhoncus 
+                    phasellus sodales, tempor faucibus consequat diam bibendum 
+                    facilisis maecenas curabitur praesent, sit orci sem congue 
+                    ipsum placerat erat pulvinar etiam. 
+                </li>
+                <li>
+                    nullam praesent sapien purus at taciti enim integer 
+                    sollicitudin luctus, porta malesuada tincidunt tempus 
+                    vehicula velit faucibus cras gravida, elit sed duis 
+                    hendrerit egestas molestie praesent maecenas. 
+                </li>
+                <li>
+                    habitant id purus eleifend non torquent sit duis mollis 
+                    proin curae fermentum habitant, lacus pharetra tempus dui 
+                    feugiat est ornare ut amet congue. 
+                </li>
+                <li>
+                    diam feugiat aliquam curabitur non pharetra ultrices primis 
+                    habitant, erat sodales nec laoreet ultricies nisi. 
+                </li>
+            </ul>
+            <p>
+                ornare gravida eu venenatis volutpat eros laoreet nostra 
+                vehicula, ornare vivamus habitasse aliquam pellentesque est 
+                nunc, ut turpis cras odio primis nunc nam. quisque bibendum 
+                nullam fringilla turpis fames tempor imperdiet, sollicitudin 
+                sociosqu lectus metus nisi hendrerit fames turpis, euismod 
+                aliquet mi consequat quisque semper. volutpat aenean posuere 
+                ante pharetra eros nibh lacus, suspendisse dictum condimentum 
+                vivamus cras suspendisse massa varius, laoreet quisque lacus 
+                tellus pellentesque egestas. tempus tristique habitant curabitur 
+                bibendum lacinia mattis habitasse felis tortor interdum, rhoncus 
+                elit dictumst semper integer lobortis mattis porttitor netus, 
+                diam duis sociosqu vehicula pulvinar aliquet ad ante imperdiet. 
+            </p>
+        </div>
 
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -109,6 +172,16 @@
                     $('.formatBtn').prop('disabled', (window.getSelection().focusOffset == window.getSelection().anchorOffset));
                 });
                 $('.formatBtn').prop('disabled', (window.getSelection().focusOffset == window.getSelection().anchorOffset));
+                
+                // Example 4
+                 $('.demo4').quickEdit({
+                    submitOnBlur: true,
+                    html: true,
+                    onSave: function (t) {
+                        // do something clever with the updated text
+                        console.log("Saving :" + t);
+                    }
+                });
 
             });
         </script>
