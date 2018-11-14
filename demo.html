@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Quick Edit</title>
+        <link  rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+               crossorigin="anonymous"
+               >
+        <style>
+            .editable:focus {
+                background-color: #fff;
+                border-color: #80bdff;
+                outline: 0;
+                box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 >Editable Elements</h1>
+            <p class="text-muted">
+                Example 1:<br> This next paragraph is editable. When it loses focus, 
+                or the return key is pressed, the changes are automatically saved 
+                (via an Ajax call -- see the console for what would be sent)
+            </p>
+
+            <p class="demo1" id="d1" data-api="/api">Lorem ipsum dolor sit amet, 
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+                commodo consequat. 
+            </p>
+
+            <hr >
+            <form >
+                <p class="text-muted">
+                    Example 2:<br> This next two paragraphs are also editable. 
+                    Updating these paragraphs updates hidden inputs. Edits are 
+                    not saved until the form is submitted (and all the edits are
+                    sent with the form data)
+                </p>
+                <p class="demo2" id="d2" data-target="p1">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+                <p class="demo2" id="d3" data-target="p2">
+                    Consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+                    ut labore et dolore magna aliqua.
+                </p>
+                <input type="hidden" name="p1" value="" />
+                <input type="hidden" name="p2" value="" />
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <hr >
+            <p class="text-muted">Example 3:<br> This next paragraph is editable, and it
+                can be formatted. Woot!</p>
+            <div class="btn-group" role="group" aria-label="Formattig">
+                <button type="button" data-method="bold" class="btn btn-outline-dark btn-sm formatBtn">B</button>
+                <button type="button" data-method="italic"  class="btn btn-outline-dark btn-sm formatBtn">I</button>
+                <button type="button" data-method="underline"  class="btn btn-outline-dark btn-sm formatBtn">U</button>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" data-method="removeFormat" class="btn btn-outline-dark btn-sm formatBtn">Remove Formatting</button>
+                <button type="button" data-method="destroy" class="btn btn-outline-dark btn-sm uiBtn">Destroy</button>
+            </div>
+
+            <p class="demo1" id="d4" data-api="/api">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna 
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            </p>
+
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="quickedit.js"></script>
+        <script>
+
+
+            $(document).ready(function () {
+
+                // Example 1
+                $('.demo1').quickEdit({
+                    onSave: function (t) {
+                        console.log(this);
+                        console.log("SAVING " + t);
+                    }
+                });
+
+                // Example 2
+                $('.demo2').quickEdit();
+
+                $(document).on('click', '.formatBtn', function () {
+                    var $btn = $(this), m = $btn.data('method');
+                    $('#d4').quickEdit('applyFormat', m);
+                });
+
+                // Example 3
+                $(document).on('click', '.uiBtn', function () {
+                    var $btn = $(this), m = $btn.data('method');
+                    $('#d4').quickEdit(m);
+                });
+                $('#d4').on('click blur', function () {
+                    $('.formatBtn').prop('disabled', (window.getSelection().focusOffset == window.getSelection().anchorOffset));
+                });
+                $('.formatBtn').prop('disabled', (window.getSelection().focusOffset == window.getSelection().anchorOffset));
+
+            });
+        </script>
+
+    </body>
+</html>
