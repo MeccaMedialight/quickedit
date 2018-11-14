@@ -1,5 +1,5 @@
 # quickedit
-Super-light weight jQuery plugin to create HTML editors for webpages. 
+SLW (Super-light weight) jQuery plugin to create HTML editors for webpages. 
 
 Features
 
@@ -10,7 +10,7 @@ Features
 
 #### Use case 1
 
-Simple markup with a url to post changes to specified in the html markup.
+Simple markup with a data-api attribute to specifiy the  url to post changes to.
 
 ```html
 <div class="container" data-api="/api">Lorem ipsum</div>
@@ -44,12 +44,10 @@ $('.container').quickEdit({
 });
 ```
 
-
-
 ### Options
 
 - **allowReturn**: false -- if false, return key is blocked  *(default false)*
 - **submitOnBlur**: if true (defaut) then the save action is called when losing focus  *(default true)*
 - **html**:  if true, use HTML rather than text *(default false)*
-- **onSave**: null, // callback to handle saving (if a function is specified, it will be used in preference to any other scheme). If no function is specified, then data-target (for specifying inputs) or data-api (for ajax) will be used. 
-- **onSaved**: function () {} // callback after auto saving
+- **onSave**: callback to handle saving (if a function is specified, it will be used in preference to any other scheme). If no function is specified, then data-target (for specifying inputs) or data-api (for ajax) will be used. *(default NULL)*
+- **onSaved**: callback after auto saving
