@@ -1,7 +1,5 @@
 # quickedit
-Super-light weight HTML editor for webpages. 
-
-Notes: Uses contentEditable.
+Super-light weight jQuery plugin to create HTML editors for webpages. 
 
 Features
 
@@ -18,7 +16,7 @@ Simple markup with a url to post changes to specified in the html markup.
 <div class="container" data-api="/api">Lorem ipsum</div>
 ```
 
-Initialise the editor with the defaults. Changes are posted to '/api'
+Initialise the editor with the defaults. Changes are posted to '/api' (urt specified in the html marlup)
 
 ```javascript
 $('.container').quickEdit();
@@ -32,7 +30,7 @@ Simpler HTML, with some options specified in javascript
 <div class="container">Lorem ipsum</div>
 ```
 
-Initialise the editor
+Initialise the editor, with a function to handle saving.
 
 ```javascript
 $('.container').quickEdit({
@@ -53,6 +51,6 @@ $('.container').quickEdit({
 - **allowReturn**: false -- if false, return key is blocked  *(default false)*
 - **submitOnBlur**: if true (defaut) then the save action is called when losing focus  *(default true)*
 - **html**:  if true, use HTML rather than text *(default false)*
-- **onSave**: null, // callback to handle saving
+- **onSave**: null, // callback to handle saving (if a function is specified, it will be used in preference to any other scheme). If no function is specified, then data-target (for specifying inputs) or data-api (for ajax) will be used. 
 - **onSaved**: function () {} // callback after auto saving
 
