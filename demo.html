@@ -8,28 +8,28 @@
     <title> Quick Edit </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>     .editable {
-            padding: 5px;
-        }
-        .editable:focus {
-            background-color: #fff;
-            border-color: #80bdff;
-            outline: 0;
-            box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
-        }
-        .demo {
-            margin: 40px 0;
-            padding: 15px;
-             border:1px solid #ddd;
-        }
-        
-        .panel {
-            position: relative;
-        padding: 1rem;
-        margin-bottom: 1rem;
-         border: 1px solid #f8f9fa;
-         background: #f8f9f5;
-        }
-        
+               padding: 5px;
+           }
+           .editable:focus {
+               background-color: #fff;
+               border-color: #80bdff;
+               outline: 0;
+               box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+           }
+           .demo {
+               margin: 40px 0;
+               padding: 15px;
+                border:1px solid #ddd;
+           }
+           
+           .panel {
+               position: relative;
+           padding: 1rem;
+           margin-bottom: 1rem;
+            border: 1px solid #f8f9fa;
+            background: #f8f9f5;
+           }
+           
     </style>
 </head>
 <body>
@@ -50,9 +50,10 @@
         console.log("SAVING " + t);
     }
 });</code>
+            
             </pre>
         </div>
-        <p class="demo1" id="d1" data-api="/api.php">
+        <p class="demo1" id="d1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
         </p>
     </div>
@@ -90,11 +91,10 @@
             <button type="button" data-method="bold" class="btn btn-outline-dark btn-sm formatBtn"> B </button> <button type="button" data-method="italic" class="btn btn-outline-dark btn-sm formatBtn"> I </button> <button type="button" data-method="underline" class="btn btn-outline-dark btn-sm formatBtn"> U </button> 
         </div>
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" data-method="removeFormat" class="btn btn-outline-dark btn-sm formatBtn"> Remove Formatting </button> 
-            <button type="button" data-method="revert" class="btn btn-outline-dark btn-sm uiBtn"> Revert </button> 
+            <button type="button" data-method="removeFormat" class="btn btn-outline-dark btn-sm formatBtn"> Remove Formatting </button> <button type="button" data-method="revert" class="btn btn-outline-dark btn-sm uiBtn"> Revert </button> 
         </div>
         <button type="button" data-method="destroy" class="btn btn-outline-dark btn-sm uiBtn"> Destroy </button> 
-        <p class="demo1" id="d4" data-api="/api">
+        <p class="demo3" id="d4" data-api="api.php">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
         </p>
     </div>
@@ -104,7 +104,8 @@
                 Example 4 
             </h3>
             <p>
-                The following "story" (div with paragraphs and a list) is editable. 
+                The following "story" (div with paragraphs and a list) is editable. It is configured with a custom 'onSave' function 
+                
             </p>
             <pre><code>$('.demo4').quickEdit({
     submitOnBlur: true,
@@ -121,7 +122,8 @@
         // we will show a special note. 
         $('#specialnote').css('display', 'block')
     }
-}</code></pre>
+}</code>
+            </pre>
         </div>
         <span id="specialnote" class="badge float-right" style="display:none"> I am visible while the story below is being edited! </span> 
         <div class="story demo4">
@@ -152,15 +154,18 @@
 </script>
 <script>
     $(document).ready(function () {
-    
+        //----------------------------------------------------------------------
         // Example 1
+        //----------------------------------------------------------------------
         $('.demo1').quickEdit({
             onSave: function (t) {
                 console.log("SAVING " + t);
             }
         });
     
+        //----------------------------------------------------------------------
         // Example 2
+        //----------------------------------------------------------------------
         $('.demo2').quickEdit();
     
         $(document).on('click', '.formatBtn', function () {
@@ -168,7 +173,11 @@
             $('#d4').quickEdit('applyFormat', m);
         });
     
+        //----------------------------------------------------------------------
         // Example 3
+        //----------------------------------------------------------------------
+        $('.demo3').quickEdit();
+    
         $(document).on('click', '.uiBtn', function () {
             var $btn = $(this), m = $btn.data('method');
             $('#d4').quickEdit(m);
@@ -178,14 +187,16 @@
         });
         $('.formatBtn').prop('disabled', (window.getSelection().focusOffset == window.getSelection().anchorOffset));
         
+        //----------------------------------------------------------------------
         // Example 4
+        //----------------------------------------------------------------------
          $('.demo4').quickEdit({
             submitOnBlur: true,
             html: true,
             onSave: function (t) {
+                // hide the special note
+                $('#specialnote').css('display', 'none')
                 // do something clever with the updated text
-                 $('#specialnote').css('display', 'none')
-    
                 $.post('api.php', function(resp){
                     
                 })

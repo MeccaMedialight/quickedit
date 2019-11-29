@@ -141,6 +141,9 @@
                 }
             } else {
                 // submit the change with ajax
+               if (!url){
+                url = $this.data('api');// 
+               }
                 $.ajax({
                     cache: false,
                     url: url,
