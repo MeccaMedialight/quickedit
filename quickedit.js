@@ -87,6 +87,10 @@
                             e.preventDefault();
                             applyFormat('italic');
                             return false;
+                        case 'u':
+                            e.preventDefault();
+                            applyFormat('underline');
+                            return false;
                     }
                 }
             });
@@ -138,21 +142,25 @@
                 if ($target.length) {
                     $("input[name='" + target + "']").val(current.replace(/^\s+|\s+$/g, ""));
                     options.onSaved.call($this, current);
+                    return true;
                 }
             } else {
                 // submit the change with ajax
                if (!url){
                 url = $this.data('api');// 
                }
-                $.ajax({
-                    cache: false,
-                    url: url,
-                    type: 'post',
-                    data: data,
-                    success: function (json) {
-                        options.onSaved.call($this, current, json);
-                    }
-                });
+               if (url){
+                    $.ajax({
+                        cache: false,
+                        url: url,
+                        type: 'post',
+                        data: data,
+                        success: function (json) {
+                            options.onSaved.call($this, current, json);
+                        }
+                    });
+                    return true;
+                }
             }
         }
         // execute formatting command and set focus
@@ -206,7 +214,7 @@
         return {
             option: option,
             revert: revert,
-             destroy: destroy,
+            destroy: destroy,
             applyFormat: applyFormat
         };
     }

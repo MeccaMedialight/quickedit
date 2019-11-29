@@ -105,7 +105,7 @@
             </h3>
             <p>
                 The following "story" (div with paragraphs and a list) is editable. It is configured with a custom 'onSave' function 
-                
+
             </p>
             <pre><code>$('.demo4').quickEdit({
     submitOnBlur: true,
@@ -168,15 +168,17 @@
         //----------------------------------------------------------------------
         $('.demo2').quickEdit();
     
-        $(document).on('click', '.formatBtn', function () {
-            var $btn = $(this), m = $btn.data('method');
-            $('#d4').quickEdit('applyFormat', m);
-        });
+     
     
         //----------------------------------------------------------------------
         // Example 3
         //----------------------------------------------------------------------
         $('.demo3').quickEdit();
+
+        $(document).on('click', '.formatBtn', function () {
+            var $btn = $(this), m = $btn.data('method');
+            $('#d4').quickEdit('applyFormat', m);
+        });
     
         $(document).on('click', '.uiBtn', function () {
             var $btn = $(this), m = $btn.data('method');
