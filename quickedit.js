@@ -27,7 +27,6 @@
 }(function ($) {
 
     var pluginName = 'quickEdit';
-
     function Plugin(element, options) {
         var el = element,
         	$this = $(element),
