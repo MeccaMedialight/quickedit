@@ -1,6 +1,7 @@
 // Uses CommonJS, AMD or browser globals to create a jQuery plugin.
 // https://github.com/umdjs/umd
-/*global define: false */
+/* global jQuery define: false */
+/* eslint-env commonjs */
 (function (factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
@@ -28,9 +29,10 @@
     var pluginName = 'quickEdit';
 
     function Plugin(element, options) {
-        var el = element;
-        var $this = $(element);
-        defaults = $.extend({}, $.fn.quickEdit.defaults);
+        var el = element,
+        	$this = $(element),
+        	defaults = $.extend({}, $.fn.quickEdit.defaults);
+        
         if ($this.is('p')) {
             defaults.allowReturn = false;
         }
@@ -40,15 +42,15 @@
         function init() {
             var
                     id = $this.attr('id'),
-                    url = $this.data('api'),
                     ht = (options.html) ? $this.html() : $this.text();
 
             if (!id) {
                 id = 'editable' + Math.round(Math.random() * 99999);
-                $this.attr('id', id); // dont need to add the id?
+                $this.attr('id', id); // todo: decide if dont need to add the id?
             }
             $this.prop('contenteditable', true).addClass('editable');
             $this.data('before', ht); // stash the current value
+            $this.data('original', ht);
             $this.data('ocol', $this.css('color'));
             $this.on("change.quickEdit", function () {
                 handleUpdate($this);
@@ -102,7 +104,12 @@
         }
 
         function showEditing($this) {
-            // depcreciated
+           if (options.onEditing){
+                // we have a callback - so use that
+                 var current = (options.html) ? $this.html() : $this.text();
+                options.onEditing.call($this, current);
+            
+            }
         }
 
         function handleUpdate($this) {
@@ -159,14 +166,29 @@
             }
         }
 
+        function revert() {
+           hook('onRevert');
+           var tmp;
+           if  (options.html){
+                 tmp = $this.html();
+                $this.html($this.data('original'));
+           } else {
+                 tmp = $this.text();
+                $this.text($this.data('original'));
+           }
+           
+           $this.data('original', tmp);
+        }
+
+
         function destroy() {
             $this.each(function () {
-                var el = this;
                 var $this = $(this);
 
                 // Add code to restore the element to its original state...
                 hook('onDestroy');
                 $this.removeData('plugin_quickEdit');
+                $this.prop('contenteditable', false).removeClass('editable');
             });
         }
 
@@ -180,7 +202,8 @@
 
         return {
             option: option,
-            destroy: destroy,
+            revert: revert,
+             destroy: destroy,
             applyFormat: applyFormat
         };
     }
@@ -215,6 +238,7 @@
         allowReturn: true,
         submitOnBlur: true,
         html: false, // if true, use HTML rather than text
+        onEditing: null, // callback to show edit state
         onSave: null, // callback to handle saving
         onSaved: function () {} // callback after auto saving
     };
