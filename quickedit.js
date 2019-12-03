@@ -245,6 +245,7 @@
     };
 
     $.fn.quickEdit.defaults = {
+        element: null,
         allowReturn: true,
         submitOnBlur: true,
         html: false, // if true, use HTML rather than text

@@ -8,6 +8,8 @@ Features
 
 ### Examples
 
+<a href="https://meccamedialight.com.au/demo/quickedit/demo.html">Demo </a>
+
 #### Use case 1
 
 Simple markup with a data-api attribute to specifiy the  url to post changes to.
