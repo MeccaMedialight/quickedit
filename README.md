@@ -8,7 +8,9 @@ Features
 
 ### Install
 
-```npm i @luke-mml/quickedit```
+```javascript
+npm i @luke-mml/quickedit
+```
 
 ### Examples
 
