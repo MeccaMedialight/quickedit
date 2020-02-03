@@ -1,0 +1,12 @@
+{
+  "name": "@luke-mml/quickedit",
+  "version": "1.0.0",
+  "description": "SLW (Super-light weight) jQuery plugin to create HTML editors for webpages",
+  "license": "MIT",
+  "repository": "MeccaMedialight/quickedit",
+  "main": "quickedit.js",
+  "keywords": [
+    "jQuery",
+    "editor"
+  ]
+}

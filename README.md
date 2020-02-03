@@ -6,6 +6,10 @@ Features
 - Changes can be either saved automatically (via ajax) when the editable area loses focus, or inputs updated (to submit changes with a normal form submit)
 - Keyboard shortcuts for very basic formatting (bold, italics)
 
+### Install
+
+```npm i @luke-mml/quickedit```
+
 ### Examples
 
 <a href="https://meccamedialight.com.au/demo/quickedit/demo.html">Demo </a>
